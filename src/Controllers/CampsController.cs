@@ -88,7 +88,7 @@ namespace CoreCodeCamp.Controllers
                 var camp = _mapper.Map<Camp>(model);
                 _repository.Add(camp);
                 if (await _repository.SaveChangesAsync())
-                    return Created($"/api/Camps/{camp.Moniker}", _mapper.Map<CampModel>(camp));
+                    return Created(location, _mapper.Map<CampModel>(camp));
             }
             catch (Exception)
             {

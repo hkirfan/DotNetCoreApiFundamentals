@@ -12,10 +12,17 @@ namespace CoreCodeCamp.Data
     {
         public CampProfile()
         {
-            this.CreateMap<Speaker, SpeakerModel>().ReverseMap();
-            this.CreateMap<Talk, TalkModel>().ReverseMap();
+            this.CreateMap<Speaker, SpeakerModel>()
+                .ReverseMap();
+
+            this.CreateMap<Talk, TalkModel>()
+                .ReverseMap()
+                .ForMember(t => t.Camp, opt => opt.Ignore())
+                .ForMember(t => t.Speaker, opt => opt.Ignore());
+
             this.CreateMap<Camp, CampModel>()
-                .ForMember(c => c.Venue, o => o.MapFrom(m => m.Location.VenueName)).ReverseMap();
+                .ForMember(c => c.Venue, o => o.MapFrom(m => m.Location.VenueName))
+                .ReverseMap();
         }
     }
 }
